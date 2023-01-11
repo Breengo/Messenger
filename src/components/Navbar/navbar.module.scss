@@ -1,0 +1,22 @@
+.navbar {
+  background-color: rgb(255, 0, 106);
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 5px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  img {
+    height: 60px;
+    margin: 0 20px;
+  }
+
+  h1 {
+    color: white;
+    font-size: 2em;
+  }
+}
