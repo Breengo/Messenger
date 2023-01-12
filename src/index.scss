@@ -12,3 +12,17 @@
   width: 100%;
   min-height: 100vh;
 }
+
+.button {
+  background: rgb(255, 0, 106);
+  color: white;
+  border: none;
+  font-size: 2em;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  &:hover {
+    scale: 1.06;
+    background: rgb(219, 4, 93);
+  }
+}

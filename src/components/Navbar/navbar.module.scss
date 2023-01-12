@@ -2,14 +2,43 @@
   background-color: rgb(255, 0, 106);
   width: 100%;
   position: absolute;
+  display: grid;
+  grid-template-columns: 1fr 3fr 1fr;
+  align-items: center;
   top: 0;
   left: 0;
-  padding: 5px;
+}
+
+.search_bar {
+  display: flex;
+  justify-self: center;
+  align-items: center;
+  border-radius: 5px;
+  background: white;
+  width: 30%;
+  transition: 1s;
+  img {
+    height: 32px;
+    opacity: 0.6;
+    margin: 0 5px;
+  }
+  input {
+    font-size: 1.5em;
+    width: 100%;
+    font-weight: 100;
+    padding: 0.2em;
+    outline: none;
+    border: none;
+    border-radius: 5px;
+  }
 }
 
 .logo {
+  height: 100%;
   display: flex;
   align-items: center;
+  text-decoration: none;
+  cursor: pointer;
   img {
     height: 60px;
     margin: 0 20px;
@@ -18,5 +47,43 @@
   h1 {
     color: white;
     font-size: 2em;
+  }
+
+  &:hover {
+    background-color: rgb(255, 0, 96);
+    img {
+      scale: 1.05;
+    }
+    h1 {
+      scale: 1.05;
+    }
+  }
+}
+
+.user_profile {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  img {
+    border-radius: 100%;
+    height: 64px;
+    width: 64px;
+    margin: 10px;
+    border: 2px solid rgb(216, 8, 129);
+  }
+  h2 {
+    color: white;
+    letter-spacing: 0.05em;
+    font-weight: 100;
+  }
+  &:hover {
+    background-color: rgb(255, 0, 96);
+    img {
+      scale: 1.05;
+    }
+    h2 {
+      scale: 1.05;
+    }
   }
 }
