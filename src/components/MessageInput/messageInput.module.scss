@@ -1,0 +1,30 @@
+.messageInput {
+  position: sticky;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  bottom: 0;
+  background-color: rgb(77, 74, 74);
+  padding: 10px;
+  textarea {
+    resize: none;
+    height: auto;
+    outline: none;
+    color: white;
+    border: 1px solid gainsboro;
+    background-color: rgb(77, 74, 74);
+    padding: 10px;
+    width: 80%;
+    border-radius: 10px;
+  }
+  img {
+    height: 32px;
+    margin-left: 30px;
+    opacity: 0.8;
+    cursor: pointer;
+    &:hover {
+      opacity: 1;
+      scale: 1.1;
+    }
+  }
+}

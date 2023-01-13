@@ -5,7 +5,7 @@ import App from "./App";
 import { BrowserRouter } from "react-router-dom";
 import { createContext } from "react";
 import { initializeApp } from "firebase/app";
-import { getStorage } from "firebase/storage";
+import { getFirestore } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
 import { Provider } from "react-redux/es/exports";
 import store from "./redux/store";
@@ -23,7 +23,7 @@ const app = initializeApp({
 export const Context = createContext<any | null>(null);
 
 const auth = getAuth(app);
-const firestore = getStorage(app);
+const firestore = getFirestore(app);
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement

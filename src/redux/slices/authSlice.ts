@@ -4,6 +4,8 @@ type UserData = {
   displayName: string;
   email: string;
   photoURL: string;
+  accessToken?: string;
+  uid: string;
 };
 
 interface IAuthState {
@@ -24,7 +26,7 @@ const auhtSlice = createSlice({
       state.isAuth = true;
       state.userData = action.payload;
     },
-    logout: (state, action) => {
+    logout: (state) => {
       state.isAuth = false;
       state.userData = null;
     },

@@ -11,11 +11,13 @@
 
 .search_bar {
   display: flex;
+  position: relative;
+  border: 2px solid transparent;
   justify-self: center;
   align-items: center;
   border-radius: 5px;
   background: white;
-  width: 30%;
+  width: 50%;
   transition: 1s;
   img {
     height: 32px;
@@ -31,6 +33,20 @@
     border: none;
     border-radius: 5px;
   }
+}
+
+.search_result {
+  position: absolute;
+  width: 110%;
+  z-index: 10;
+  background-color: rgb(255, 255, 255);
+  border-bottom: 1px solid rgb(255, 0, 100);
+  border-left: 1px solid rgb(255, 0, 100);
+  border-right: 1px solid rgb(255, 0, 100);
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  top: 60px;
+  left: -5%;
 }
 
 .logo {

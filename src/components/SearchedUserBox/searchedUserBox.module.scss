@@ -1,0 +1,25 @@
+.search_box {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  cursor: pointer;
+  padding: 10px;
+  img {
+    height: 64px;
+    width: 64px;
+    border-radius: 100%;
+    margin-right: 30px;
+  }
+  h1 {
+    color: rgb(255, 0, 100);
+  }
+
+  &:hover {
+    background-color: rgb(219, 216, 216);
+  }
+}
+
+.last {
+  border-bottom-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+}

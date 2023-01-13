@@ -10,6 +10,18 @@ function MainPage() {
         <DialogueBox />
         <DialogueBox />
         <DialogueBox />
+        <DialogueBox />
+        <DialogueBox />
+        <DialogueBox />
+        <DialogueBox />
+        <DialogueBox />
+        <DialogueBox />
+        <DialogueBox />
+        <DialogueBox />
+        <DialogueBox />
+        <DialogueBox />
+        <DialogueBox />
+        <DialogueBox />
       </div>
     </div>
   );

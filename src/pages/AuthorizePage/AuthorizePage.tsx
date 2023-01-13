@@ -5,16 +5,38 @@ import { Context } from "../..";
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { useAppDispatch } from "../../redux/store";
 import { login } from "../../redux/slices/authSlice";
+import { addDoc, collection, getDocs, query, where } from "firebase/firestore";
 
 function AuthorizePage() {
-  const { auth } = useContext(Context);
+  const { auth, firestore } = useContext(Context);
   const dispatch = useAppDispatch();
 
   const loginHandler = async () => {
     const provider = new GoogleAuthProvider();
     const { user } = await signInWithPopup(auth, provider);
-    const { displayName, email, photoURL } = user;
-    dispatch(login({ displayName, email, photoURL }));
+    const { displayName, email, photoURL, uid } = user;
+    dispatch(login({ displayName, email, photoURL, uid }));
+    const userInDB = query(
+      collection(firestore, "users"),
+      where("uid", "==", user.uid)
+    );
+
+    let needToAd = true;
+
+    try {
+      const querySnapshot = await getDocs(userInDB);
+      querySnapshot.forEach(() => (needToAd = false));
+    } catch (err) {
+      console.log(err);
+    }
+    if (needToAd) {
+      addDoc(collection(firestore, "users"), {
+        displayName,
+        email,
+        photoURL,
+        uid,
+      });
+    }
   };
 
   return (
