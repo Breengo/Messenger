@@ -2,12 +2,18 @@ import { Link } from "react-router-dom";
 import styles from "./dialogueBox.module.scss";
 import img from "../../assets/default.jpg";
 
-const DialogueBox = () => {
+interface IUserInfo {
+  displayName: string;
+  photoURL: string;
+  uid: string;
+}
+
+const DialogueBox: React.FC<IUserInfo> = ({ ...dialogueInfo }) => {
   return (
-    <Link to="/dialogue/5" className={styles.box}>
-      <img src={img} alt="error" />
+    <Link to={`/dialogue/${dialogueInfo.uid}`} className={styles.box}>
+      <img src={dialogueInfo.photoURL} alt="error" />
       <div>
-        <h2>Name</h2>
+        <h2>{dialogueInfo.displayName}</h2>
         <p>
           Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corrupti
           corporis maiores sunt ut, placeat consequatur.

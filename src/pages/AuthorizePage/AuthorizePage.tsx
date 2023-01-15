@@ -5,7 +5,14 @@ import { Context } from "../..";
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { useAppDispatch } from "../../redux/store";
 import { login } from "../../redux/slices/authSlice";
-import { addDoc, collection, getDocs, query, where } from "firebase/firestore";
+import {
+  doc,
+  collection,
+  getDoc,
+  query,
+  setDoc,
+  where,
+} from "firebase/firestore";
 
 function AuthorizePage() {
   const { auth, firestore } = useContext(Context);
@@ -16,26 +23,18 @@ function AuthorizePage() {
     const { user } = await signInWithPopup(auth, provider);
     const { displayName, email, photoURL, uid } = user;
     dispatch(login({ displayName, email, photoURL, uid }));
-    const userInDB = query(
-      collection(firestore, "users"),
-      where("uid", "==", user.uid)
-    );
-
-    let needToAd = true;
-
     try {
-      const querySnapshot = await getDocs(userInDB);
-      querySnapshot.forEach(() => (needToAd = false));
+      const userInDb = await getDoc(doc(firestore, "users", uid));
+      if (!userInDb.exists()) {
+        setDoc(doc(firestore, "users", uid), {
+          displayName,
+          email,
+          photoURL,
+        });
+        setDoc(doc(firestore, "userChats", uid), {});
+      }
     } catch (err) {
       console.log(err);
-    }
-    if (needToAd) {
-      addDoc(collection(firestore, "users"), {
-        displayName,
-        email,
-        photoURL,
-        uid,
-      });
     }
   };
 

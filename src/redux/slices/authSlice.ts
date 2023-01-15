@@ -1,16 +1,15 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-type UserData = {
+export type IUserData = {
   displayName: string;
   email: string;
   photoURL: string;
-  accessToken?: string;
   uid: string;
 };
 
 interface IAuthState {
   isAuth: boolean;
-  userData: null | UserData;
+  userData: null | IUserData;
 }
 
 const initialState: IAuthState = {

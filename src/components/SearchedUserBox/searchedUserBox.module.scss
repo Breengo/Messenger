@@ -1,6 +1,8 @@
 .search_box {
+  z-index: 50;
   display: flex;
   align-items: center;
+  text-decoration: none;
   width: 100%;
   cursor: pointer;
   padding: 10px;

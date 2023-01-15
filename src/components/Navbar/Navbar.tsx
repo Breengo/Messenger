@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link, Outlet } from "react-router-dom";
 import styles from "./navbar.module.scss";
 
@@ -6,21 +6,51 @@ import logoSVG from "../../assets/logo.svg";
 import searchSVG from "../../assets/search.svg";
 import { useSelector } from "react-redux";
 import { RootState } from "../../redux/store";
+import {
+  collection,
+  DocumentData,
+  getDocs,
+  query,
+  where,
+} from "firebase/firestore";
+import { Context } from "../..";
 import SearchedUserBox from "../SearchedUserBox/SearchedUserBox";
+import debounce from "../../utils/debounce";
 
 function Navbar() {
   const searchBoxRef = React.useRef<HTMLDivElement>(null);
   const userData = useSelector((state: RootState) => state.auth.userData);
-  const [showResult, setShowResult] = React.useState(false);
-  const onSearchFocusHandler = () => {
+  const { firestore } = useContext(Context);
+  const [foundUsers, setFoundUsers] = React.useState<DocumentData[]>([]);
+  const fetchUsers = async (name: string) => {
+    const userInDB = query(
+      collection(firestore, "users"),
+      where("displayName", "==", name)
+    );
+    try {
+      setFoundUsers([]);
+      const querySnapshot = await getDocs(userInDB);
+      querySnapshot.forEach((doc) => {
+        setFoundUsers([...foundUsers, { ...doc.data(), uid: doc.id }]);
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const onSearchFocusHandler = (e: React.FocusEvent<HTMLInputElement>) => {
     if (searchBoxRef.current)
       searchBoxRef.current.style.border = "2px solid rgb(46, 43, 43)";
-    setShowResult(true);
+    debounce(() => fetchUsers(e.target.value), 300);
   };
   const onSearchBlurHandler = () => {
     if (searchBoxRef.current)
       searchBoxRef.current.style.border = "2px solid transparent";
-    setShowResult(false);
+    setTimeout(() => setFoundUsers([]), 100);
+  };
+
+  const handleSearcUsers = (e: React.ChangeEvent<HTMLInputElement>) => {
+    debounce(() => fetchUsers(e.target.value), 300);
   };
 
   return (
@@ -35,19 +65,29 @@ function Navbar() {
           <input
             onFocus={onSearchFocusHandler}
             onBlur={onSearchBlurHandler}
+            onChange={(e) => handleSearcUsers(e)}
             placeholder="Search for someone"
             type="text"
           />
-          {showResult && (
-            <div className={styles.search_result}>
-              <SearchedUserBox last={false} />
-              <SearchedUserBox last={false} />
-              <SearchedUserBox last={false} />
-              <SearchedUserBox last={false} />
-              <SearchedUserBox last={false} />
-              <SearchedUserBox last={true} />
-            </div>
-          )}
+          <div className={styles.search_result}>
+            {foundUsers.map((userData, index) => {
+              if (index === foundUsers.length - 1)
+                return (
+                  <SearchedUserBox
+                    key={userData.uid}
+                    {...{ ...userData, last: true }}
+                  />
+                );
+              else {
+                return (
+                  <SearchedUserBox
+                    key={userData.uid}
+                    {...{ ...userData, last: false }}
+                  />
+                );
+              }
+            })}
+          </div>
         </div>
         <div className={styles.user_profile}>
           <img
