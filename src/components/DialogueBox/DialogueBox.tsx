@@ -1,11 +1,14 @@
 import { Link } from "react-router-dom";
 import styles from "./dialogueBox.module.scss";
-import img from "../../assets/default.jpg";
+import { IAtTime } from "../../pages/DialoguePage.tsx/DialoguePage";
+import dateConverter from "../../utils/dateConverter";
 
 interface IUserInfo {
   displayName: string;
   photoURL: string;
   uid: string;
+  updatedAt: IAtTime;
+  lastMessage: string;
 }
 
 const DialogueBox: React.FC<IUserInfo> = ({ ...dialogueInfo }) => {
@@ -14,12 +17,9 @@ const DialogueBox: React.FC<IUserInfo> = ({ ...dialogueInfo }) => {
       <img src={dialogueInfo.photoURL} alt="error" />
       <div>
         <h2>{dialogueInfo.displayName}</h2>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corrupti
-          corporis maiores sunt ut, placeat consequatur.
-        </p>
+        <p>{dialogueInfo.lastMessage}</p>
       </div>
-      <h5>15 Jan</h5>
+      <h5>{dateConverter(dialogueInfo.updatedAt.seconds)}</h5>
     </Link>
   );
 };

@@ -15,13 +15,15 @@ function MainPage() {
       doc(firestore, "userChats", auth.currentUser.uid)
     );
     const chatsList = chats.data();
+    setDialogueList([]);
     for (const key in chatsList) {
-      setDialogueList((prev) => [...prev, { ...chatsList[key].userInfo }]);
+      setDialogueList((prev) => {
+        return [...prev, { ...chatsList[key] }];
+      });
     }
     setIsLoading(false);
   };
   React.useEffect(() => {
-    setDialogueList([]);
     fetchDialogues();
   }, []);
 
@@ -42,12 +44,15 @@ function MainPage() {
           </div>
         )}
         {!isLoading &&
+          dialogueList[0] &&
           dialogueList.map((dialogueInfo) => (
             <DialogueBox
-              key={dialogueInfo.uid}
-              displayName={dialogueInfo.displayName}
-              uid={dialogueInfo.uid}
-              photoURL={dialogueInfo.photoURL}
+              key={dialogueInfo.userInfo.uid}
+              updatedAt={dialogueInfo.updatedAt}
+              lastMessage={dialogueInfo.lastMessage}
+              displayName={dialogueInfo.userInfo.displayName}
+              uid={dialogueInfo.userInfo.uid}
+              photoURL={dialogueInfo.userInfo.photoURL}
             />
           ))}
       </div>

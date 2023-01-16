@@ -5,14 +5,7 @@ import { Context } from "../..";
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { useAppDispatch } from "../../redux/store";
 import { login } from "../../redux/slices/authSlice";
-import {
-  doc,
-  collection,
-  getDoc,
-  query,
-  setDoc,
-  where,
-} from "firebase/firestore";
+import { doc, getDoc, setDoc } from "firebase/firestore";
 
 function AuthorizePage() {
   const { auth, firestore } = useContext(Context);

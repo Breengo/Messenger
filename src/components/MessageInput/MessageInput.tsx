@@ -1,17 +1,23 @@
 import styles from "./messageInput.module.scss";
 import React, { useContext } from "react";
-import { collection, addDoc } from "firebase/firestore";
-import { useSelector } from "react-redux";
-import { RootState } from "../../redux/store";
+import { arrayUnion, doc, Timestamp, updateDoc } from "firebase/firestore";
+import { uuidv4 } from "@firebase/util";
 import { Context } from "../..";
-import { useParams } from "react-router-dom";
-import { serverTimestamp } from "firebase/firestore";
+
 import sendSVG from "../../assets/send.svg";
 
-export default function MessageInput() {
+interface IMessageBox {
+  combinedId: string;
+  uid: string;
+  receiverId: string | undefined;
+}
+
+const MessageInput: React.FC<IMessageBox> = ({
+  receiverId,
+  uid,
+  combinedId,
+}) => {
   const messageInputRef = React.useRef<HTMLTextAreaElement>(null);
-  const userData = useSelector((state: RootState) => state.auth.userData);
-  const ruid = useParams().id;
   const { firestore } = useContext(Context);
   function resizeInputHandler() {
     if (messageInputRef.current) {
@@ -23,18 +29,30 @@ export default function MessageInput() {
   }
   async function sendMessageHandler() {
     if (messageInputRef.current) {
-      try {
-        const docRef = await addDoc(collection(firestore, "messages"), {
-          ruid,
-          uid: userData?.uid,
-          createdAt: serverTimestamp(),
-          text: messageInputRef.current.value,
-        });
-        console.log("Document written with ID: ", docRef.id);
-      } catch (e) {
-        console.error("Error adding document: ", e);
-      }
+      const message = messageInputRef.current.value;
       messageInputRef.current.value = "";
+      try {
+        await updateDoc(doc(firestore, "chats", combinedId), {
+          messages: arrayUnion({
+            id: uuidv4(),
+            uid: uid,
+            createdAt: Timestamp.now(),
+            text: message,
+          }),
+        });
+        await updateDoc(doc(firestore, "userChats", uid), {
+          [combinedId + ".updatedAt"]: Timestamp.now(),
+          [combinedId + ".lastMessage"]: message,
+        });
+        if (receiverId) {
+          await updateDoc(doc(firestore, "userChats", receiverId), {
+            [combinedId + ".updatedAt"]: Timestamp.now(),
+            [combinedId + ".lastMessage"]: message,
+          });
+        }
+      } catch (e) {
+        console.error(e);
+      }
     }
   }
 
@@ -48,4 +66,6 @@ export default function MessageInput() {
       <img onClick={sendMessageHandler} src={sendSVG} alt="error" />
     </div>
   );
-}
+};
+
+export default MessageInput;

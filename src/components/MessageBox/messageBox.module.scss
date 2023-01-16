@@ -1,7 +1,7 @@
 .messageBox {
   padding: 15px;
   text-decoration: none;
-  border-bottom: 1px solid gainsboro;
+  border-top: 1px solid gainsboro;
   display: flex;
   align-items: center;
   position: relative;
@@ -21,13 +21,13 @@
     margin-bottom: 5px;
   }
   p {
-    color: gray;
+    color: rgb(73, 70, 70);
   }
 
   h5 {
     position: absolute;
     right: 5%;
     top: 20%;
-    color: rgb(54, 54, 54);
+    color: rgb(107, 98, 98);
   }
 }

@@ -10,7 +10,13 @@
   border: 1px solid gray;
   border-radius: 10px;
   min-height: 90vh;
-  width: 50%;
+
+  @media (min-width: 1400px) {
+    width: 50%;
+  }
+
+  width: 90%;
+
   margin-bottom: 50px;
   overflow-y: scroll;
   -ms-overflow-style: none;
