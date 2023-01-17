@@ -45,16 +45,23 @@ function MainPage() {
         )}
         {!isLoading &&
           dialogueList[0] &&
-          dialogueList.map((dialogueInfo) => (
-            <DialogueBox
-              key={dialogueInfo.userInfo.uid}
-              updatedAt={dialogueInfo.updatedAt}
-              lastMessage={dialogueInfo.lastMessage}
-              displayName={dialogueInfo.userInfo.displayName}
-              uid={dialogueInfo.userInfo.uid}
-              photoURL={dialogueInfo.userInfo.photoURL}
-            />
-          ))}
+          dialogueList
+            .sort(
+              (firstDialogue, secondDialogue) =>
+                firstDialogue.updatedAt.seconds -
+                secondDialogue.updatedAt.seconds
+            )
+            .reverse()
+            .map((dialogueInfo) => (
+              <DialogueBox
+                key={dialogueInfo.userInfo.uid}
+                updatedAt={dialogueInfo.updatedAt}
+                lastMessage={dialogueInfo.lastMessage}
+                displayName={dialogueInfo.userInfo.displayName}
+                uid={dialogueInfo.userInfo.uid}
+                photoURL={dialogueInfo.userInfo.photoURL}
+              />
+            ))}
       </div>
     </div>
   );

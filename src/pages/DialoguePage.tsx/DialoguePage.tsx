@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { Navigate, useNavigate, useParams } from "react-router-dom";
 import { Context } from "../..";
 import MessageBox from "../../components/MessageBox/MessageBox";
 import styles from "./dialoguePage.module.scss";
@@ -96,7 +96,7 @@ const DialoguePage = () => {
   };
 
   if (!userData) {
-    return <h1>Error</h1>;
+    return <Navigate to="/" />;
   }
 
   return (

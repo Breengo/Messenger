@@ -2,8 +2,6 @@
   padding: 15px;
   text-decoration: none;
   border-top: 1px solid gainsboro;
-  display: flex;
-  align-items: center;
   position: relative;
   cursor: pointer;
   &:hover {
@@ -11,6 +9,7 @@
   }
   img {
     height: 64px;
+    float: left;
     width: 64px;
     border-radius: 100%;
     margin: 0 10px;
@@ -22,12 +21,13 @@
   }
   p {
     color: rgb(73, 70, 70);
+    word-break: break-all;
   }
 
   h5 {
     position: absolute;
     right: 5%;
-    top: 20%;
+    top: 20px;
     color: rgb(107, 98, 98);
   }
 }

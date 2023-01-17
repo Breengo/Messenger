@@ -3,13 +3,20 @@
   height: 100vh;
   display: flex;
   justify-content: center;
-  padding-top: 100px;
+  @media (min-width: 800px) {
+    padding-top: 100px;
+  }
+  padding-top: 220px;
 }
 
 .mainContainer {
   border: 1px solid gray;
   border-radius: 10px;
-  min-height: 90vh;
+  height: 80vh;
+
+  @media (min-width: 800px) {
+    height: 90vh;
+  }
 
   @media (min-width: 1400px) {
     width: 50%;

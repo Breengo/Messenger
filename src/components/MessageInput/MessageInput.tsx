@@ -31,6 +31,7 @@ const MessageInput: React.FC<IMessageBox> = ({
     if (messageInputRef.current) {
       const message = messageInputRef.current.value;
       messageInputRef.current.value = "";
+      resizeInputHandler();
       try {
         await updateDoc(doc(firestore, "chats", combinedId), {
           messages: arrayUnion({

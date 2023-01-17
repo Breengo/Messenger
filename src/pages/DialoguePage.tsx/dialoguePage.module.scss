@@ -3,15 +3,24 @@
   height: 100vh;
   display: flex;
   justify-content: center;
-  padding-top: 100px;
+  @media (min-width: 800px) {
+    padding-top: 100px;
+  }
+  padding-top: 220px;
 }
 
 .mainContainer {
   border: 1px solid gray;
   position: relative;
-  min-height: 90vh;
+  height: 80vh;
+  @media (min-width: 800px) {
+    height: 90vh;
+  }
   border-radius: 10px;
-  width: 50%;
+  width: 90%;
+  @media (min-width: 1400px) {
+    width: 50%;
+  }
   margin-bottom: 50px;
   display: flex;
   flex-direction: column;
@@ -67,7 +76,10 @@
 }
 
 .message_list {
-  padding-bottom: 40px;
+  @media (min-width: 800px) {
+    padding-bottom: 40px;
+  }
+  padding-bottom: 60px;
   display: flex;
   min-height: 90%;
   overflow-y: scroll;

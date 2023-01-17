@@ -14,10 +14,14 @@ interface IUserInfo {
 const DialogueBox: React.FC<IUserInfo> = ({ ...dialogueInfo }) => {
   return (
     <Link to={`/dialogue/${dialogueInfo.uid}`} className={styles.box}>
-      <img src={dialogueInfo.photoURL} alt="error" />
+      <img
+        referrerPolicy="no-referrer"
+        src={dialogueInfo.photoURL}
+        alt="error"
+      />
       <div>
         <h2>{dialogueInfo.displayName}</h2>
-        <p>{dialogueInfo.lastMessage}</p>
+        <p>{dialogueInfo.lastMessage.slice(0, 90)}</p>
       </div>
       <h5>{dateConverter(dialogueInfo.updatedAt.seconds)}</h5>
     </Link>
