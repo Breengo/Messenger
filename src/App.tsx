@@ -22,10 +22,11 @@ function App() {
       const photoURL = user?.photoURL;
       const uid = user?.uid;
       const email = user?.email;
-      dispatch(login({ displayName, photoURL, uid, email }));
+      if (uid) {
+        dispatch(login({ displayName, photoURL, uid, email }));
+      }
     });
   }, []);
-
   return (
     <div className="App">
       <Routes>
