@@ -70,23 +70,6 @@ function Navbar() {
           <img src={logoSVG} alt="error" />
           <h1>QuackChat</h1>
         </Link>
-        <div
-          onClick={() => setShowUserMenu(!showUserMenu)}
-          className={styles.user_profile}
-        >
-          <img
-            referrerPolicy="no-referrer"
-            src={userData?.photoURL}
-            alt="error"
-          />
-          <h2>{userData?.displayName}</h2>
-        </div>
-        {showUserMenu && (
-          <div onClick={handleLogout} className={styles.user_menu}>
-            <img src={logoutSVG} alt="error" />
-            <h1>Log Out</h1>
-          </div>
-        )}
         <div className={styles.search}>
           <div ref={searchBoxRef} className={styles.search_bar}>
             <img src={searchSVG} alt="error" />
@@ -120,6 +103,23 @@ function Navbar() {
             )}
           </div>
         </div>
+        <div
+          onClick={() => setShowUserMenu(!showUserMenu)}
+          className={styles.user_profile}
+        >
+          <img
+            referrerPolicy="no-referrer"
+            src={userData?.photoURL}
+            alt="error"
+          />
+          <h2>{userData?.displayName}</h2>
+        </div>
+        {showUserMenu && (
+          <div onClick={handleLogout} className={styles.user_menu}>
+            <img src={logoutSVG} alt="error" />
+            <h1>Log Out</h1>
+          </div>
+        )}
       </nav>
       <Outlet />
     </>

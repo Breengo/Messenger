@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { Navigate, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { Context } from "../..";
 import MessageBox from "../../components/MessageBox/MessageBox";
 import styles from "./dialoguePage.module.scss";
@@ -36,7 +36,6 @@ const DialoguePage = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const { auth, firestore } = useContext(Context);
-  const [isLoading, setIsLoading] = React.useState(true);
   const currentUser = auth.currentUser;
   const receiver = useParams().id;
   const [messageList, setMessageList] = React.useState<IMessage[]>([]);
@@ -57,7 +56,6 @@ const DialoguePage = () => {
     const unsub = onSnapshot(doc(firestore, "chats", combinedId), (doc) => {
       const data = doc.data()?.messages;
       setMessageList(data);
-      setIsLoading(false);
       return () => unsub();
     });
   }, []);
@@ -96,7 +94,16 @@ const DialoguePage = () => {
   };
 
   if (!userData) {
-    return <Navigate to="/" />;
+    return (
+      <div className={styles.page}>
+        <div ref={containerRef} className={styles.mainContainer}>
+          <div className={styles.message_block}>
+            <img src={logoSVG} alt="error" />
+            <h1>Loading...</h1>
+          </div>
+        </div>
+      </div>
+    );
   }
 
   return (
@@ -112,11 +119,10 @@ const DialoguePage = () => {
             <h2>{userData.displayName}</h2>
           </div>
         </div>
-        {isLoading &&
-          [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15].map((item) => (
-            <DialogueSkeleton key={item} />
-          ))}
-        {!isLoading && (
+        {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15].map((item) => (
+          <DialogueSkeleton key={item} />
+        ))}
+        {
           <div className={styles.message_list}>
             {messageList &&
               messageList[0] &&
@@ -134,13 +140,13 @@ const DialoguePage = () => {
                 />
               ))}
             {messageList && !messageList[0] && (
-              <div className={styles.no_messages}>
+              <div className={styles.message_block}>
                 <img src={logoSVG} alt="error" />
                 <h1>No messages</h1>
               </div>
             )}
           </div>
-        )}
+        }
 
         <MessageInput
           combinedId={combinedId}

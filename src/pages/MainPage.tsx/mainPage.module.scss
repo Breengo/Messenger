@@ -3,23 +3,21 @@
   height: 100vh;
   display: flex;
   justify-content: center;
-  @media (min-width: 800px) {
-    padding-top: 100px;
-  }
-  padding-top: 220px;
+  padding-top: 100px;
 }
 
 .mainContainer {
   border: 1px solid gray;
   border-radius: 10px;
-  height: 80vh;
-
-  @media (min-width: 800px) {
-    height: 90vh;
-  }
+  height: 90vh;
 
   @media (min-width: 1400px) {
     width: 50%;
+  }
+  @media (max-width: 600px) {
+    width: 100%;
+    border: 1px solid gray;
+    border-radius: 0;
   }
 
   width: 90%;
@@ -35,12 +33,21 @@
 }
 
 .no_dialogues {
+  font-size: 1em;
+  @media (max-width: 600px) {
+    font-size: 0.7em;
+  }
+  text-align: center;
   height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  padding: 10px;
   img {
     height: 300px;
+    @media (max-width: 600px) {
+      height: 150px;
+    }
   }
 }
