@@ -35,7 +35,7 @@
   width: 100%;
   position: sticky;
   @media (max-width: 600px) {
-    position: absolute;
+    position: fixed;
   }
   top: 0;
   z-index: 60;
