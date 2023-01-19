@@ -1,5 +1,5 @@
 .messageBox {
-  padding: 15px;
+  padding: 15px 10px 25px 10px;
   text-decoration: none;
   border-top: 1px solid gainsboro;
   position: relative;
@@ -27,7 +27,7 @@
   h5 {
     position: absolute;
     right: 5%;
-    top: 20px;
+    bottom: 10px;
     color: rgb(107, 98, 98);
   }
 }

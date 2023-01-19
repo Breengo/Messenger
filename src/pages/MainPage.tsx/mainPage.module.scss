@@ -4,6 +4,9 @@
   display: flex;
   justify-content: center;
   padding-top: 100px;
+  @media (max-width: 600px) {
+    padding-top: 70px;
+  }
 }
 
 .mainContainer {
@@ -16,7 +19,7 @@
   }
   @media (max-width: 600px) {
     width: 100%;
-    border: 1px solid gray;
+    border: none;
     border-radius: 0;
   }
 

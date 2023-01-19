@@ -17,7 +17,6 @@ import {
 import { useAppDispatch } from "../../redux/store";
 import { logout } from "../../redux/slices/authSlice";
 import MessageInput from "../../components/MessageInput/MessageInput";
-import DialogueSkeleton from "../../components/DialogueBox/DialogueSkeleton";
 
 export interface IAtTime {
   seconds: number;
@@ -119,9 +118,6 @@ const DialoguePage = () => {
             <h2>{userData.displayName}</h2>
           </div>
         </div>
-        {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15].map((item) => (
-          <DialogueSkeleton key={item} />
-        ))}
         {
           <div className={styles.message_list}>
             {messageList &&

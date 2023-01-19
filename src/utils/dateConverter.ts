@@ -7,6 +7,9 @@ export default function dateConverter(time: number) {
   const hours = Math.floor((passedTime / (1000 * 60 * 60)) % 24);
   const minutes = Math.floor((passedTime / (1000 * 60)) % 60);
   const seconds = Math.floor((passedTime / 1000) % 60);
+  if (passedTime === 0) {
+    return "now";
+  }
   if (years) {
     return `${years} years ago`;
   }

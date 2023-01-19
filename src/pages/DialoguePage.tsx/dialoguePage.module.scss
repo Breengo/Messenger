@@ -4,6 +4,9 @@
   display: flex;
   justify-content: center;
   padding-top: 100px;
+  @media (max-width: 600px) {
+    padding-top: 0;
+  }
 }
 
 .mainContainer {
@@ -19,6 +22,8 @@
   @media (max-width: 600px) {
     width: 100%;
     border-radius: 0;
+    border: none;
+    height: 100vh;
   }
   margin-bottom: 50px;
   display: flex;
@@ -29,13 +34,16 @@
 .pageHeader {
   width: 100%;
   position: sticky;
+  @media (max-width: 600px) {
+    position: absolute;
+  }
   top: 0;
-  z-index: 10;
+  z-index: 60;
   background-color: rgb(77, 74, 74);
   border-bottom: 1px solid rgb(54, 52, 52);
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  @media (max-width: 600px) {
+  @media (max-width: 400px) {
     grid-template-columns: 1fr 1fr;
   }
   height: 80px;
@@ -87,8 +95,10 @@
 .message_list {
   @media (min-width: 800px) {
     padding-bottom: 40px;
+    padding-top: 0px;
   }
-  padding-bottom: 60px;
+  padding-bottom: 80px;
+  padding-top: 80px;
   display: flex;
   min-height: 90%;
   overflow-y: scroll;
